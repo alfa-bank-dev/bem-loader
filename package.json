@@ -1,0 +1,22 @@
+{
+  "name": "bem-css-loader",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive"
+  },
+  "license": "Mozilla Public License Version 2.0",
+  "dependencies": {
+    "@bem/deps": "0.0.10",
+    "JSONStream": "^1.0.7",
+    "bem-walk": "^1.0.0-alpha1",
+    "path": "^0.12.7",
+    "stream-to-array": "^2.2.1"
+  },
+  "devDependencies": {
+    "expect": "^1.13.4",
+    "mocha": "^2.4.5",
+    "webpack": "^1.12.12"
+  }
+}
