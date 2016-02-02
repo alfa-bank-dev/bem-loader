@@ -48,7 +48,7 @@ CollectBemAssetsPlugin.prototype.apply = function(compiler) {
                         return `${path}/__${dep.elem}/_${dep.modName}/${filename}`;
                     }
 
-                    throw new Error(`Cannot generate correct path to file usind dep ${dep}`);
+                    throw new Error(`Cannot generate correct path to file using dep ${dep}`);
                 });
 
                 var allPossiblePaths = [];
