@@ -11,12 +11,16 @@ describe('CollectBemAssetsPlugin', () => {
         var expectingResults = {
             button: [
                 path.join(cwd, 'test/bem-project/common.blocks/button/button.css'),
+                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.css'),
+                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/_theme/button__icon_theme_black.css'),
                 path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_test.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css')
+                path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css'),
             ],
             select: [
                 path.join(cwd, 'test/bem-project/common.blocks/button/button.css'),
                 path.join(cwd, 'test/bem-project/common.blocks/select/select.css'),
+                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.css'),
+                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/_theme/button__icon_theme_black.css'),
                 path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_test.css'),
                 path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css'),
             ]

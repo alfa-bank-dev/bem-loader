@@ -1,6 +1,7 @@
 var getAssets = require('./lib/getAssets');
 var getDeps = require('./lib/getDeps');
 var path = require('path');
+var bemNaming = require('bem-naming');
 
 /**
  * @param options
@@ -29,23 +30,25 @@ CollectBemAssetsPlugin.prototype.apply = function(compiler) {
                 var tech = this.options.tech;
                 var tmpResults = blockDeps.map(dep => {
                     var path = `${dep.block}/`;
-                    if (!dep.elem && !dep.modName) {
-                        return `${path}${dep.block}.${tech}`;
+                    var filename = `${bemNaming.stringify(dep)}.${tech}`;
+
+                    if (bemNaming.isBlock(dep)) {
+                        return `${path}${filename}`;
                     }
 
-                    if (dep.elem) {
-                        path += `__${dep.elem}/${dep.block}__${dep.elem}.${tech}`;
+                    if (bemNaming.isElem(dep)) {
+                        return `${path}/__${dep.elem}/${filename}`;
                     }
 
-                    if (dep.modName && dep.modVal) {
-                        if (dep.modVal === true) {
-                            path += `_${dep.modName}/${dep.block}_${dep.modName}.${tech}`;
-                        } else {
-                            path += `_${dep.modName}/${dep.block}_${dep.modName}_${dep.modVal}.${tech}`;
-                        }
+                    if (bemNaming.isBlockMod(dep)) {
+                        return `${path}/_${dep.modName}/${filename}`;
                     }
 
-                    return path;
+                    if (bemNaming.isElemMod(dep)) {
+                        return `${path}/__${dep.elem}/_${dep.modName}/${filename}`;
+                    }
+
+                    throw new Error(`Cannot generate correct path to file usind dep ${dep}`);
                 });
 
                 var allPossiblePaths = [];
