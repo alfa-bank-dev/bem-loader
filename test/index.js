@@ -15,12 +15,10 @@ describe('bem-css-loader', () => {
 
     it('should be ok', () => {
         loader.setData({
-            blocks: {
-                'button': [
-                    'test.css',
-                    'fooo-bar.css',
-                ]
-            }
+            button: [
+                'test.css',
+                'fooo-bar.css',
+            ]
         });
 
         var testParts = [
