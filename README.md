@@ -30,7 +30,8 @@ And use loader:
 ```js
 
     // -----> somewhere in code
-    require('bem-css-loader!button.css'); // this file have to exist, also a name of the file is the name of BEM-block
+    require('bem-css-loader!./button.css'); // this file have to exist and should be created manually,
+                                            // also a name of the file is the name of BEM-block
 
     // ... Webpack should handle everything else
 ```
