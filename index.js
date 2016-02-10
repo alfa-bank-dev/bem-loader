@@ -1,4 +1,8 @@
 var path = require('path');
+var _ = require('lodash');
+var Promise = require('bluebird');
+var fs = require('fs');
+var readFile = Promise.promisify(fs.readFile);
 
 module.exports = function() {};
 
@@ -24,4 +28,19 @@ module.exports.pitch = function(remainingRequest) {
     })();`;
 };
 
+// FIXME: move to separate repository
 module.exports.CollectBemAssetsPlugin = require('./plugin');
+// FIXME: move to separate repository
+/**
+ * @param files - list of paths to bemhtml stuff
+ * @return Promise
+ */
+module.exports.generateBemHtml = function(files) {
+    var paths = [];
+    Object.keys(files).forEach(blockName => paths = paths.concat(files[blockName]));
+    paths = _.uniq(paths);
+
+    return Promise.all(paths.map(p => readFile(p))).then(bemhtmlData => {
+        return bemhtmlData.reduce((prev, cur) => prev += cur.toString(), '');
+    })
+};
