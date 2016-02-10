@@ -35,7 +35,7 @@ describe('bem-css-loader', () => {
         });
     });
 
-    it('TEST should generate module with bemhtml', done => {
+    it('TEST should generate module with bemhtml', () => {
         var data = {
             button: [
                 path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
@@ -48,15 +48,12 @@ describe('bem-css-loader', () => {
             ]
         };
 
-        generateBemHtml(data).then(res => {
-            var bemhtml = [];
-            Object.keys(data).forEach(block => {
-                bemhtml = bemhtml.concat(data[block].map(p => fs.readFileSync(p).toString()));
-            });
-
-            bemhtml.forEach(b => expect(res).toContain(b));
-
-            done();
+        var res = generateBemHtml(data);
+        var bemhtml = [];
+        Object.keys(data).forEach(block => {
+            bemhtml = bemhtml.concat(data[block].map(p => fs.readFileSync(p).toString()));
         });
+
+        bemhtml.forEach(b => expect(res).toContain(b));
     });
 });

@@ -40,7 +40,9 @@ module.exports.generateBemHtml = function(files) {
     Object.keys(files).forEach(blockName => paths = paths.concat(files[blockName]));
     paths = _.uniq(paths);
 
-    return Promise.all(paths.map(p => readFile(p))).then(bemhtmlData => {
-        return bemhtmlData.reduce((prev, cur) => prev += cur.toString(), '');
-    })
+
+    return paths.reduce((prev, cur) => {
+        prev += fs.readFileSync(cur).toString();
+        return prev;
+    }, '');
 };
