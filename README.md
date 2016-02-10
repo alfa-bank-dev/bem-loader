@@ -14,8 +14,8 @@ It's necessary to set up plugin:
 
         plugins: [
             new CollectBemAssetsPlugin({
-                setData: loader.setData, // pass setData callback into plugin
-                tech: 'css', // or maybe post.css
+                done: loader.setData, // pass setData callback into plugin
+                techs: ['css', 'bemhtml'], // or maybe post.css
                 // where to search css
                 levels: [
                     './bem-project/common.blocks'),

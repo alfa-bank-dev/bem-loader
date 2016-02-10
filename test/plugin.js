@@ -6,34 +6,47 @@ var expect = require('expect');
 var CollectBemAssetsPlugin = require(path.join(cwd, 'index')).CollectBemAssetsPlugin;
 
 describe('CollectBemAssetsPlugin', () => {
-    it('should set data', (done) => {
-        var setDataWasCalled = false;
+    it('should set data', done => {
+        var doneWasCalled = false;
         var expectingResults = {
-            button: [
-                path.join(cwd, 'test/bem-project/common.blocks/button/button.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/_theme/button__icon_theme_black.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_test.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css'),
-            ],
-            select: [
-                path.join(cwd, 'test/bem-project/common.blocks/button/button.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/select/select.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/_theme/button__icon_theme_black.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_test.css'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css'),
-            ]
+            css: {
+                button: [
+                    path.join(cwd, 'test/bem-project/common.blocks/button/button.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/_theme/button__icon_theme_black.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_test.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css'),
+                ],
+                select: [
+                    path.join(cwd, 'test/bem-project/common.blocks/button/button.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/select/select.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/_theme/button__icon_theme_black.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_test.css'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css'),
+                ]
+            },
+            bemhtml: {
+                button: [
+                    path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml')
+                ],
+                select: [
+                    path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
+                    path.join(cwd, 'test/bem-project/common.blocks/select/select.bemhtml'),
+                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml')
+                ]
+            }
         };
         var data;
         var webpackConfig = {
             plugins: [
                 new CollectBemAssetsPlugin({
-                    setData: function(_data) {
-                        setDataWasCalled = true;
+                    done: _data => {
+                        doneWasCalled = true;
                         data = _data;
                     },
-                    tech: 'css',
+                    techs: ['css', 'bemhtml'],
                     levels: [
                         path.join(cwd, './test/bem-project/common.blocks'),
                     ]
@@ -44,10 +57,8 @@ describe('CollectBemAssetsPlugin', () => {
         webpack(webpackConfig, (err, state) => {
             expect(err).toNotExist();
             expect(data).toEqual(expectingResults);
-            expect(setDataWasCalled).toBe(true);
+            expect(doneWasCalled).toBe(true);
             done();
         });
     });
 });
-
-
