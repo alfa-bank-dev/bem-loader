@@ -1,6 +1,8 @@
 BEM CSS loader
 ==============
 
+[![Build Status](https://travis-ci.org/alfa-bank-dev/bem-css-loader.svg?branch=master)](https://travis-ci.org/alfa-bank-dev/bem-css-loader)
+
 The aim of this loader and plugin is to require needed css files from BEM project into Webpack one.
 It's necessary to set up plugin:
 
