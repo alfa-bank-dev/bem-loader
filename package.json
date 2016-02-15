@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "jscs ./ && jshint . && mocha --recursive"
   },
   "license": "Mozilla Public License Version 2.0",
   "dependencies": {
@@ -19,7 +19,11 @@
   },
   "devDependencies": {
     "expect": "^1.13.4",
+    "git-hooks": "^1.0.2",
+    "jscs": "^2.9.0",
+    "jshint": "^2.9.1",
     "mocha": "^2.4.5",
+    "rmdir": "^1.2.0",
     "webpack": "^1.12.12"
   }
 }

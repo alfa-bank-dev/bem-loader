@@ -10,7 +10,7 @@ describe('bem-css-loader', () => {
     it('should throw error', (done) => {
         try {
             loader.pitch.call({}, 'button.css');
-        } catch(e) {
+        } catch (e) {
             expect(e.message).toBe('Styles for button block is not defined');
             done();
         }
@@ -21,7 +21,7 @@ describe('bem-css-loader', () => {
             button: [
                 'test.css',
                 'fooo-bar.css',
-            ]
+            ],
         });
 
         var testParts = [
@@ -39,13 +39,13 @@ describe('bem-css-loader', () => {
         var data = {
             button: [
                 path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml')
+                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml'),
             ],
             select: [
                 path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
                 path.join(cwd, 'test/bem-project/common.blocks/select/select.bemhtml'),
-                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml')
-            ]
+                path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml'),
+            ],
         };
 
         var res = generateBemHtml(data);

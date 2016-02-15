@@ -14,7 +14,7 @@ function CollectBemAssetsPlugin(options) {
     this.options = options;
     this.assets = {};
     this.possiblePaths = {};
-};
+}
 
 function generateBemPath(dep, tech) {
     var path = `${dep.block}/`;
@@ -65,7 +65,8 @@ CollectBemAssetsPlugin.prototype.apply = function(compiler) {
                         var path = generateBemPath(dep, tech);
 
                         if (!path) {
-                            throw new Error(`Cannot generate correct path to file using dep ${dep}`);
+                            throw new Error(`Cannot generate
+                                correct path to file using dep ${dep}`);
                         }
 
                         return path;
@@ -76,11 +77,15 @@ CollectBemAssetsPlugin.prototype.apply = function(compiler) {
                         allPossiblePaths = allPossiblePaths.concat(tmpResults.map(r => path.join(level, r)));
                     });
 
-                    results[tech][depData.block] = allPossiblePaths.filter(p => this.possiblePaths[tech].indexOf(p) !== -1);
+                    results[tech][depData.block] = allPossiblePaths
+                        .filter(p => this.possiblePaths[tech].indexOf(p) !== -1);
                 });
             });
             this.options.done(results);
-        }).then(callback).catch((err) => { console.log(err); callback(err)});
+        }).then(callback).catch((err) => {
+            console.log(err);
+            callback(err);
+        });
     };
 
     compiler.plugin('watch-run', handler);

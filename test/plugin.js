@@ -24,19 +24,19 @@ describe('CollectBemAssetsPlugin', () => {
                     path.join(cwd, 'test/bem-project/common.blocks/button/__icon/_theme/button__icon_theme_black.css'),
                     path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_test.css'),
                     path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css'),
-                ]
+                ],
             },
             bemhtml: {
                 button: [
                     path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
-                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml')
+                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml'),
                 ],
                 select: [
                     path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
                     path.join(cwd, 'test/bem-project/common.blocks/select/select.bemhtml'),
-                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml')
-                ]
-            }
+                    path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml'),
+                ],
+            },
         };
         var data;
         var webpackConfig = {
@@ -46,15 +46,16 @@ describe('CollectBemAssetsPlugin', () => {
                         doneWasCalled = true;
                         data = _data;
                     },
+
                     techs: ['css', 'bemhtml'],
                     levels: [
                         path.join(cwd, './test/bem-project/common.blocks'),
-                    ]
+                    ],
                 }),
             ],
         };
 
-        webpack(webpackConfig, (err, state) => {
+        webpack(webpackConfig, (err) => {
             expect(err).toNotExist();
             expect(data).toEqual(expectingResults);
             expect(doneWasCalled).toBe(true);
