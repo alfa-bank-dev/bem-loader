@@ -35,7 +35,7 @@ describe('bem-css-loader', () => {
         });
     });
 
-    it('TEST should generate module with bemhtml', () => {
+    it('should generate module with bemhtml', () => {
         var data = {
             button: [
                 path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
