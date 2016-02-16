@@ -1,0 +1,23 @@
+{
+    "preset": "airbnb",
+
+    "esnext": true,
+
+    "disallowSpacesInFunctionDeclaration": {
+        "beforeOpeningRoundBrace": true
+    },
+    "requireSpacesInFunctionDeclaration": {
+        "beforeOpeningCurlyBrace": true
+    },
+    "requireSpacesInAnonymousFunctionExpression": {
+        "beforeOpeningCurlyBrace": true
+    },
+    "validateIndentation": 4,
+
+    "excludeFiles": [
+        "node_modules/**",
+        "test/bem-project/**",
+        ".git/**"
+    ],
+    "maximumLineLength": 120
+}

@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var spawn = require('child_process').spawn;
+var exec = require('child_process').execSync;
+var gitCachedFiles = exec('git diff --cached --name-only --diff-filter=ACMR').toString().trim();
+
+if (gitCachedFiles) {
+        spawn('npm', ['test'], {stdio: 'inherit'}).on('close', process.exit.bind(process));
+}
