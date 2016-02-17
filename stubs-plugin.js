@@ -70,7 +70,7 @@ StubsCreatorPlugin.prototype.apply = function(compiler) {
         }).then((exists) => {
             if (!exists) { // we'd like to not create new files because of watch mode
                 fs.writeFileSync(stubsIndex, stubsToCreate.map(s => {
-                    return `require('bem-css-loader!./${s.name}.css');`;
+                    return `require('bem-loader!./${s.name}.css');`;
                 }).join('\n'));
             }
         }).then(() => {

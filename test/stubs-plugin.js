@@ -31,7 +31,7 @@ describe('StubsCreatorPlugin', () => {
 
             var data = fs.readFileSync(path.resolve(stubsDir, 'index.js')).toString();
             ['button.css', 'select.css'].forEach(c => {
-                expect(data.indexOf(`require('bem-css-loader!./${c}');`) !== -1).toBeTruthy();
+                expect(data.indexOf(`require('bem-loader!./${c}');`) !== -1).toBeTruthy();
             });
 
             done();

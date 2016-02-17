@@ -1,14 +1,21 @@
-BEM CSS loader
+BEM loader
 ==============
 
-[![Build Status](https://travis-ci.org/alfa-bank-dev/bem-css-loader.svg?branch=master)](https://travis-ci.org/alfa-bank-dev/bem-css-loader)
+[![Build Status](https://travis-ci.org/alfa-bank-dev/bem-loader.svg?branch=master)](https://travis-ci.org/alfa-bank-dev/bem-loader)
 
-The aim of this loader and plugin is to require needed css files from BEM project into Webpack one.
+The module has several purposes:
+ - load CSS from bem-based project
+ - provide functions to combine bemhtml templates from bem-based project
+
+
+Loading CSS
+------------
+
 It's necessary to set up plugin:
 
 ```js
     // -----> in webpack.config.js
-    var loader = require('bem-css-loader');
+    var loader = require('bem-loader');
     var CollectBemAssetsPlugin = loader.CollectBemAssetsPlugin;
 
     module.exports = {
@@ -68,4 +75,38 @@ And somethere in your code:
 
 ```js
     require('./bem-stubs');
+```
+
+
+Loading BEMHTML
+---------------
+
+```js
+
+    // -----> in webpack.config.js
+    var loader = require('bem-css-loader');
+    var CollectBemAssetsPlugin = loader.CollectBemAssetsPlugin;
+    var generateBemHtml = loader.generateBemHtml;
+
+    module.exports = {
+        plugins: [
+            new CollectBemAssetsPlugin({
+                done: function(data) {
+                    if (process.env.STANDALONE) {
+                        // e.g.
+                        var out = bemxjst.vidom.generate(generateBemHtml(data.bemhtml));
+                        fs.writeFileSync(
+                            './dist/bem-templates.js',
+                            out
+                        );
+                    }
+                },
+                techs: ['bemhtml'],
+                levels: [
+                    './bem-project/common.blocks'),
+                ]
+
+            }),
+        ],
+    };
 ```

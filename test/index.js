@@ -5,7 +5,7 @@ var cwd = process.cwd();
 var generateBemHtml = loader.generateBemHtml;
 var fs = require('fs');
 
-describe('bem-css-loader', () => {
+describe('bem-loader', () => {
 
     it('should throw error', (done) => {
         try {
