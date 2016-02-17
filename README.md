@@ -1,7 +1,7 @@
 BEM loader
 ==============
 
-[![Build Status](https://travis-ci.org/alfa-bank-dev/bem-loader.svg?branch=master)](https://travis-ci.org/alfa-bank-dev/bem-loader)
+[![Build Status](https://travis-ci.org/alfa-bank-dev/bem-css-loader.svg?branch=master)](https://travis-ci.org/alfa-bank-dev/bem-loader)
 
 The module has several purposes:
  - load CSS from bem-based project
