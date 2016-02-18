@@ -1,7 +1,7 @@
 BEM loader
 ==============
 
-[![Build Status](https://travis-ci.org/alfa-bank-dev/bem-css-loader.svg?branch=master)](https://travis-ci.org/alfa-bank-dev/bem-loader)
+[![Build Status](https://travis-ci.org/alfa-bank-dev/bem-loader.svg?branch=master)](https://travis-ci.org/alfa-bank-dev/bem-loader)
 
 The module has several purposes:
  - load CSS from bem-based project
@@ -39,7 +39,7 @@ And use loader:
 ```js
 
     // -----> somewhere in code
-    require('bem-css-loader!./button.css'); // this file have to exist and should be created manually,
+    require('bem-loader!./button.css'); // this file have to exist and should be created manually,
                                             // also a name of the file is the name of BEM-block
 
     // ... Webpack should handle everything else
@@ -49,7 +49,7 @@ You can also generate stubs using StubsCreatorPlugin:
 
 ```js
     // -----> in webpack.config.js
-    var loader = require('bem-css-loader');
+    var loader = require('bem-loader');
     var CollectBemAssetsPlugin = loader.StubsCreatorPlugin;
 
     var stubsDir = './bem-stubs';
@@ -84,7 +84,7 @@ Loading BEMHTML
 ```js
 
     // -----> in webpack.config.js
-    var loader = require('bem-css-loader');
+    var loader = require('bem-loader');
     var CollectBemAssetsPlugin = loader.CollectBemAssetsPlugin;
     var generateBemHtml = loader.generateBemHtml;
 
