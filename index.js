@@ -6,7 +6,7 @@ module.exports = function() {};
 
 var data = {};
 
-module.exports.setData = function(_data) {
+module.exports.setStylesData = function(_data) {
     data = _data;
 };
 

@@ -23,7 +23,7 @@ It's necessary to set up plugin:
 
         plugins: [
             new CollectBemAssetsPlugin({
-                done: loader.setData, // pass setData callback into plugin
+                done: (data) => { loader.setStylesData(data.css); }, // load data to css-loader
                 techs: ['css', 'bemhtml'], // or maybe post.css
                 // where to search css
                 levels: [

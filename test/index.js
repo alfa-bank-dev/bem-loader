@@ -17,7 +17,7 @@ describe('bem-loader', () => {
     });
 
     it('should be ok', () => {
-        loader.setData({
+        loader.setStylesData({
             button: [
                 'test.css',
                 'fooo-bar.css',
