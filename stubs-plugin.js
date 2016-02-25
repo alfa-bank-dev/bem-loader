@@ -43,7 +43,9 @@ StubsCreatorPlugin.prototype.apply = function(compiler) {
         if (this.options.pathsToComponents) {
             this.options.pathsToComponents.forEach(p => {
                 stubsToCreate = stubsToCreate.concat(
-                    fs.readdirSync(p).map(genStubItem)
+                    fs.readdirSync(p).
+                        filter(f => fs.statSync(path.resolve(p, f)).isDirectory()).
+                        map(genStubItem)
                 );
             });
         } else {
@@ -67,11 +69,18 @@ StubsCreatorPlugin.prototype.apply = function(compiler) {
             return Promise.all(res.map(r => writeFileAsync(r.path, '')));
         }).then(() => {
             return existsAsync(stubsIndex);
-        }).then((exists) => {
-            if (!exists) { // we'd like to not create new files because of watch mode
-                fs.writeFileSync(stubsIndex, stubsToCreate.map(s => {
-                    return `require('bem-loader!./${s.name}.css');`;
-                }).join('\n'));
+        }).then(exists => {
+            var currentContent = '';
+            var newContent = stubsToCreate.map(s => {
+                return `require('bem-loader!./${s.name}.css');`;
+            }).join('\n');
+
+            if (exists) {
+                currentContent = fs.readFileSync(stubsIndex).toString();
+            }
+
+            if (currentContent !== newContent) {
+                fs.writeFileSync(stubsIndex, newContent);
             }
         }).then(() => {
             callback();
