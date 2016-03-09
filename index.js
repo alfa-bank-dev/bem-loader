@@ -18,9 +18,7 @@ module.exports.pitch = function(remainingRequest) {
     }
 
     var styles = data[blockName];
-    var requireStr = styles.reduce((prev, cur) => {
-        return `${prev}require('${cur}');`;
-    }, '');
+    var requireStr = styles.reduce((prev, cur) => `${prev}require('${cur}');`, '');
 
     return `module.exports = (function() {
         ${requireStr}

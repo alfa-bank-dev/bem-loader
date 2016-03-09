@@ -1,17 +1,15 @@
 var fs = require('fs');
 var path = require('path');
 var Promise = require('bluebird');
-var existsAsync = (path) => {
-    return new Promise((resolve) => {
-        fs.stat(path, (err, res) => {
-            if (res) {
-                resolve(true);
-            } else {
-                resolve(false);
-            }
-        });
+var existsAsync = path => new Promise((resolve) => {
+    fs.stat(path, (err, res) => {
+        if (res) {
+            resolve(true);
+        } else {
+            resolve(false);
+        }
     });
-};
+});
 
 var writeFileAsync = Promise.promisify(fs.writeFile);
 var POSTFIX = 'css';
@@ -33,12 +31,10 @@ StubsCreatorPlugin.prototype.apply = function(compiler) {
 
     var handler = (params, callback) => {
         var stubsToCreate = [];
-        var genStubItem = (n) => {
-            return {
-                name: n,
-                path: `${path.resolve(stubsDir, n)}.${POSTFIX}`,
-            };
-        };
+        var genStubItem = n  => ({
+            name: n,
+            path: `${path.resolve(stubsDir, n)}.${POSTFIX}`,
+        });
 
         if (this.options.pathsToComponents) {
             this.options.pathsToComponents.forEach(p => {

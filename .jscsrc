@@ -19,5 +19,6 @@
         "test/bem-project/**",
         ".git/**"
     ],
-    "maximumLineLength": 120
+    "maximumLineLength": 120,
+    "requireShorthandArrowFunctions": false
 }
