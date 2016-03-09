@@ -27,7 +27,7 @@ It's necessary to set up plugin:
                 techs: ['css', 'bemhtml'], // or maybe post.css
                 // where to search css
                 levels: [
-                    './bem-project/common.blocks'),
+                    './bem-project/common.blocks',
                 ]
             }),
         ]
