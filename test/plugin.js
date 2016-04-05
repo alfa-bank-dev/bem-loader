@@ -37,6 +37,10 @@ describe('CollectBemAssetsPlugin', () => {
                     path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml'),
                 ],
             },
+            lololo: {
+                button: [],
+                select: [],
+            },
         };
         var data;
         var webpackConfig = {
@@ -47,7 +51,7 @@ describe('CollectBemAssetsPlugin', () => {
                         data = _data;
                     },
 
-                    techs: ['css', 'bemhtml'],
+                    techs: ['css', 'bemhtml', 'lololo'],
                     levels: [
                         path.join(cwd, './test/bem-project/common.blocks'),
                     ],

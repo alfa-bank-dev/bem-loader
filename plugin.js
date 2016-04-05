@@ -45,6 +45,12 @@ CollectBemAssetsPlugin.prototype.apply = function(compiler) {
             var allBlocks = [];
             this.options.techs.forEach(tech => {
                 this.possiblePaths[tech] = [];
+
+                if (!res[tech]) {
+                    this.possiblePaths[tech] = [];
+                    return;
+                }
+
                 var blocks = Object.keys(res[tech]);
                 allBlocks = allBlocks.concat(blocks);
 
