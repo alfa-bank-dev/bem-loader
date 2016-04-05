@@ -25,5 +25,9 @@
     "mocha": "^2.4.5",
     "rmdir": "^1.2.0",
     "webpack": "^1.12.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alfa-bank-dev/bem-loader"
   }
 }

@@ -1,5 +1,4 @@
-BEM loader
-==============
+# BEM loader
 
 [![Build Status](https://travis-ci.org/alfa-bank-dev/bem-loader.svg?branch=master)](https://travis-ci.org/alfa-bank-dev/bem-loader)
 
@@ -8,8 +7,7 @@ The module has several purposes:
  - provide functions to combine bemhtml templates from bem-based project
 
 
-Loading CSS
-------------
+## Loading CSS
 
 It's necessary to set up plugin:
 
@@ -78,8 +76,8 @@ And somethere in your code:
 ```
 
 
-Loading BEMHTML
----------------
+## Loading BEMHTML
+
 
 ```js
 
