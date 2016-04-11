@@ -9,6 +9,7 @@ var _ = require('lodash');
  *    - done callback
  *    - levels
  *    - techs - array of techs
+ *    - techExtensions - a hash map techName => String[] - it's possible that tech has more than one extension
  */
 function CollectBemAssetsPlugin(options) {
     this.options = options;
@@ -39,24 +40,36 @@ function generateBemPath(dep, tech) {
     return path;
 }
 
+function getTechExtensions(tech, extensions) {
+    return extensions && extensions[tech] && extensions[tech].length > 0
+        ? extensions[tech]
+        : [tech];
+}
+
 CollectBemAssetsPlugin.prototype.apply = function(compiler) {
     var handler = (params, callback) => {
         getAssets(this.options.levels).then((res) => {
             var allBlocks = [];
             this.options.techs.forEach(tech => {
                 this.possiblePaths[tech] = [];
+                var techExtensions = getTechExtensions(tech, this.options.techExtensions).filter(t => res[t]);
 
-                if (!res[tech]) {
-                    this.possiblePaths[tech] = [];
+                if (techExtensions.length === 0) {
                     return;
                 }
 
-                var blocks = Object.keys(res[tech]);
+                var blocks = techExtensions
+                    .map(t => Object.keys(res[t]))
+                    .reduce((acc, blocks) => acc.concat(blocks), []);
                 allBlocks = allBlocks.concat(blocks);
 
                 blocks.forEach(block => {
-                    this.possiblePaths[tech] = this.possiblePaths[tech].concat(res[tech][block]);
+                    this.possiblePaths[tech] = this.possiblePaths[tech]
+                        .concat(techExtensions
+                            .map(t => res[t][block])
+                            .reduce((acc, paths) => acc.concat(paths), []));
                 });
+                this.possiblePaths[tech] = this.possiblePaths[tech].filter(p => p);
             });
 
             return getDeps(_.uniq(allBlocks), this.options.levels);
@@ -66,17 +79,21 @@ CollectBemAssetsPlugin.prototype.apply = function(compiler) {
 
             this.options.techs.forEach(tech => {
                 results[tech] = {};
+                var techExtensions = getTechExtensions(tech, this.options.techExtensions);
+
                 deps.forEach(depData => {
                     tmpResults = depData.deps.map(dep => {
-                        var path = generateBemPath(dep, tech);
+                        return techExtensions.map(t => {
+                            var path = generateBemPath(dep, t);
 
-                        if (!path) {
-                            throw new Error(`Cannot generate
-                                correct path to file using dep ${dep}`);
-                        }
+                            if (!path) {
+                                throw new Error(`Cannot generate
+                                    correct path to file using dep ${dep}`);
+                            }
 
-                        return path;
-                    });
+                            return path;
+                        });
+                    }).reduce((acc, paths) => acc.concat(paths), []);
 
                     var allPossiblePaths = [];
                     this.options.levels.forEach(level => {
