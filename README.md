@@ -23,6 +23,9 @@ It's necessary to set up plugin:
             new CollectBemAssetsPlugin({
                 done: (data) => { loader.setStylesData(data.css); }, // load data to css-loader
                 techs: ['css', 'bemhtml'], // or maybe post.css
+                techExtensions: { // it is possible to define custom extensions for technology
+                    bemhtml: ['bemhtml', 'bemhtml.js']
+                },
                 // where to search css
                 levels: [
                     './bem-project/common.blocks',

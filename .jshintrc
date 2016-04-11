@@ -18,6 +18,7 @@
     "globals"      : {
         "Promise"   : true
     },
+    "laxbreak": true,
     "overrides": {
         "test/**/*": {
             "mocha": true,

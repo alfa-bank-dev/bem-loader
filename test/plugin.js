@@ -25,8 +25,12 @@ describe('CollectBemAssetsPlugin', () => {
                     path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_test.css'),
                     path.join(cwd, 'test/bem-project/common.blocks/button/_theme/button_theme_x1.css'),
                 ],
+                link: [],
             },
             bemhtml: {
+                link: [
+                    path.join(cwd, 'test/bem-project/common.blocks/link/link.bemhtml.js'),
+                ],
                 button: [
                     path.join(cwd, 'test/bem-project/common.blocks/button/button.bemhtml'),
                     path.join(cwd, 'test/bem-project/common.blocks/button/__icon/button__icon.bemhtml'),
@@ -40,6 +44,7 @@ describe('CollectBemAssetsPlugin', () => {
             lololo: {
                 button: [],
                 select: [],
+                link: [],
             },
         };
         var data;
@@ -52,6 +57,7 @@ describe('CollectBemAssetsPlugin', () => {
                     },
 
                     techs: ['css', 'bemhtml', 'lololo'],
+                    techExtensions: { bemhtml: ['bemhtml', 'bemhtml.js'] },
                     levels: [
                         path.join(cwd, './test/bem-project/common.blocks'),
                     ],
